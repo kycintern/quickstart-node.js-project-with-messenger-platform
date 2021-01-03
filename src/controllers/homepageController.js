@@ -39,6 +39,7 @@ let postWebhook = (req, res) => {
   if (body.object === 'page') {
     // Iterate over each entry - there may be multiple if batched
     body.entry.forEach(function (entry) {
+      console.log('****************** entry: ', entry)
       // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
 
