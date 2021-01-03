@@ -23,7 +23,6 @@ let getWebhook = (req, res) => {
     // Checks the mode and token sent is correct
     if (mode === 'subscribe' && token === VERIFY_TOKEN) {
       // Responds with the challenge token from the request
-      console.log('WEBHOOK_VERIFIED');
       res.status(200).send(challenge);
     } else {
       // Responds with '403 Forbidden' if verify tokens do not match
@@ -42,11 +41,9 @@ let postWebhook = (req, res) => {
     body.entry.forEach(function (entry) {
       // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
-      console.log(webhook_event);
 
       // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
-      console.log('Sender PSID: ' + sender_psid);
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
@@ -183,7 +180,12 @@ let getWebview = (req, res, next) => {
 };
 
 let postWebview = (req, res, next) => {
-  console.log(req.body);
+  console.log('req.body: ', req.body);
+  let response = {
+    text: `I will book a ${req.body.pillow} and a ${req.body.bed}`,
+  };
+
+  callSendAPI(req.body.psid, response);
   res.redirect('/');
 };
 module.exports = {
