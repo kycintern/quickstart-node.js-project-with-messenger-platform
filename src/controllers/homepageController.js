@@ -139,12 +139,18 @@ let handlePostback = (sender_psid, received_postback) => {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'yes') {
-    response = { text: 'You just click yes!' };
-  } else if (payload === 'no') {
-    response = { text: 'You just click no' };
-  } else if (payload === 'GET_STARTED') {
-    response = { text: 'Welcome you to Linh Bot' };
+  switch (payload) {
+    case 'yes':
+      response = { text: 'You just click yes!' };
+      break;
+    case 'no':
+      response = { text: 'You just click no!' };
+      break;
+    case 'GET_STARTED':
+      response = { text: 'Welcome you to Linh Bot' };
+      break;
+    default:
+      break;
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
