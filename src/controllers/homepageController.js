@@ -5,6 +5,25 @@ import homePageServices from '../services/homepageService';
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const WEBVIEW_URL = process.env.WEBVIEW_URL;
+const APP_SECRET = process.env.APP_SECRET;
+const APP_ID = process.env.APP_ID;
+
+const { MessengerClient } = require('messaging-api-messenger');
+
+const client = new MessengerClient({
+  accessToken: PAGE_ACCESS_TOKEN,
+  appId: APP_ID,
+  appSecret: APP_SECRET,
+  version: '6.0',
+});
+
+client.sendRawBody(body).catch((error) => {
+  console.log(error); // formatted error message
+  console.log(error.stack); // error stack trace
+  console.log(error.config); // axios request config
+  console.log(error.request); // HTTP request
+  console.log(error.response); // HTTP response
+});
 
 let getHomepage = (req, res) => {
   return res.render('homepage.ejs');
@@ -153,7 +172,16 @@ let handlePostback = (sender_psid, received_postback) => {
       break;
   }
   // Send the message to acknowledge the postback
-  callSendAPI(sender_psid, response);
+  await client.sendText(USER_ID, 'Pick a color:', {
+    quickReplies: [
+      {
+        contentType: 'text',
+        title: 'Red',
+        payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED',
+      },
+    ],
+  });
+  // callSendAPI(sender_psid, response);
 };
 
 // Sends response messages via the Send API
