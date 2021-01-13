@@ -17,14 +17,6 @@ const client = new MessengerClient({
   version: '6.0',
 });
 
-client.sendRawBody(body).catch((error) => {
-  console.log(error); // formatted error message
-  console.log(error.stack); // error stack trace
-  console.log(error.config); // axios request config
-  console.log(error.request); // HTTP request
-  console.log(error.response); // HTTP response
-});
-
 let getHomepage = (req, res) => {
   return res.render('homepage.ejs');
 };
