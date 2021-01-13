@@ -159,17 +159,20 @@ let handlePostback = async (sender_psid, received_postback) => {
       break;
     case 'GET_STARTED':
       response = { 
-        "payload": {
-          "template_type":"button",
-          "text":"Check my website",
-          "buttons":[
-            {
-              "type":"web_url",
-              "url":"https://demo-chatbot-webview.herokuapp.com/",
-              "title":"My website"
-            },
-          ]
-        } 
+        "attachment": {
+          "type":"template",
+          "payload": {
+            "template_type":"button",
+            "text":"Check my website",
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"https://demo-chatbot-webview.herokuapp.com/",
+                "title":"My website"
+              },
+            ]
+          } 
+        }
       };
       break;
     case 'PICKING_RED':
