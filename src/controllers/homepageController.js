@@ -130,7 +130,7 @@ let handleMessage = (sender_psid, received_message) => {
   callSendAPI(sender_psid, response);
 };
 
-// Handles messaging_postbacks events
+// Handles messaging_postbacks events (button click event)
 let handlePostback = (sender_psid, received_postback) => {
   let response;
 
@@ -139,9 +139,9 @@ let handlePostback = (sender_psid, received_postback) => {
 
   // Set the response based on the postback payload
   if (payload === 'yes') {
-    response = { text: 'Thanks!' };
+    response = { text: 'You just click yes!' };
   } else if (payload === 'no') {
-    response = { text: 'Oops, try sending another image.' };
+    response = { text: 'You just click no' };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
