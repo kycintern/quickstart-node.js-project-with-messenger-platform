@@ -158,22 +158,25 @@ let handlePostback = async (sender_psid, received_postback) => {
       response = { text: 'You just click no!' };
       break;
     case 'GET_STARTED':
-      response = { text: 'Welcome you to Linh Bot' };
+      await client.sendText(sender_psid, 'Welcome', {
+        quickReplies: [
+          {
+            contentType: 'text',
+            title: 'Red',
+            payload: 'PICKING_RED',
+          },
+        ],
+      });
+      // response = { text: 'Welcome you to Linh Bot' };
+      break;
+    case 'PICKING_RED':
+      response = { text: 'You choose red' };
       break;
     default:
       break;
   }
   // Send the message to acknowledge the postback
-  await client.sendText(sender_psid, 'Pick a color:', {
-    quickReplies: [
-      {
-        contentType: 'text',
-        title: 'Red',
-        payload: 'DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED',
-      },
-    ],
-  });
-  // callSendAPI(sender_psid, response);
+  callSendAPI(sender_psid, response);
 };
 
 // Sends response messages via the Send API
