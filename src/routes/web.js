@@ -10,6 +10,7 @@ let initWebRoutes = (app) => {
     router.post("/webhook", homepageController.postWebhook);
     router.get("/webview", homepageController.getWebview);
     router.post("/webview", homepageController.postWebview);
+    router.post("/set-up-profile", homepageController.handleSetupProfile);
 
     return app.use("/", router);
 };

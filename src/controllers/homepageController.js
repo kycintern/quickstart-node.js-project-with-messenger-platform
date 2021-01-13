@@ -1,5 +1,6 @@
 require('dotenv').config();
 import request from 'request';
+import homePageServices from '../services/homepageService';
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -188,10 +189,23 @@ let postWebview = (req, res, next) => {
   callSendAPI(req.body.psid, response);
   res.redirect('/');
 };
+
+let handleSetupProfile = async (req, res) => {
+  
+  try {
+    await homePageServices.handleSetupProfile();
+    res.redirect('/')
+  } catch (error) {
+    console.log('error: ', error);    
+  }
+  
+}
+
 module.exports = {
   getHomepage: getHomepage,
   getWebhook: getWebhook,
   postWebhook: postWebhook,
   getWebview,
   postWebview,
+  handleSetupProfile
 };
