@@ -151,7 +151,7 @@ let handleMessage = (sender_psid, received_message) => {
 };
 
 // Handles messaging_postbacks events (button click event)
-let handlePostback = (sender_psid, received_postback) => {
+let handlePostback = async (sender_psid, received_postback) => {
   let response;
 
   // Get the payload for the postback
@@ -172,7 +172,7 @@ let handlePostback = (sender_psid, received_postback) => {
       break;
   }
   // Send the message to acknowledge the postback
-  await client.sendText(USER_ID, 'Pick a color:', {
+  await client.sendText(sender_psid, 'Pick a color:', {
     quickReplies: [
       {
         contentType: 'text',
