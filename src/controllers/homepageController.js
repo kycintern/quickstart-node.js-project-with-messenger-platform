@@ -143,6 +143,8 @@ let handlePostback = (sender_psid, received_postback) => {
     response = { text: 'You just click yes!' };
   } else if (payload === 'no') {
     response = { text: 'You just click no' };
+  } else if (payload === 'GET_STARTED') {
+    response = { text: 'Welcome you to Linh Bot' };
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
@@ -191,15 +193,21 @@ let postWebview = (req, res, next) => {
 };
 
 let handleSetupProfile = async (req, res) => {
-  
   try {
     await homePageServices.handleSetupProfile();
-    res.redirect('/')
+    res.redirect('/');
   } catch (error) {
-    console.log('error: ', error);    
+    console.log('error: ', error);
   }
-  
-}
+};
+
+let getSetupProfile = async (req, res) => {
+  try {
+    res.render('profile');
+  } catch (error) {
+    console.log('error: ', error);
+  }
+};
 
 module.exports = {
   getHomepage: getHomepage,
@@ -207,5 +215,6 @@ module.exports = {
   postWebhook: postWebhook,
   getWebview,
   postWebview,
-  handleSetupProfile
+  handleSetupProfile,
+  getSetupProfile,
 };

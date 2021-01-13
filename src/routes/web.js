@@ -11,6 +11,7 @@ let initWebRoutes = (app) => {
     router.get("/webview", homepageController.getWebview);
     router.post("/webview", homepageController.postWebview);
     router.post("/set-up-profile", homepageController.handleSetupProfile);
+    router.get("/set-up-profile", homepageController.getSetupProfile);
 
     return app.use("/", router);
 };
