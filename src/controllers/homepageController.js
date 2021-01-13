@@ -39,7 +39,6 @@ let postWebhook = (req, res) => {
   if (body.object === 'page') {
     // Iterate over each entry - there may be multiple if batched
     body.entry.forEach(function (entry) {
-      console.log('****************** entry: ', entry)
       // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
 
@@ -72,7 +71,7 @@ let handleMessage = (sender_psid, received_message) => {
     // Create the payload for a basic text message, which
     // will be added to the body of our request to the Send API
     response = {
-      text: `You sent the message: "${received_message.text}". Now send me an attachment!`,
+      text: `Hello. You sent the message: "${received_message.text}". Now send me an attachment!`,
     };
 
     if (received_message.text.toLowerCase() === 'webview') {
