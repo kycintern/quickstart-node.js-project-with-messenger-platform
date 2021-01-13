@@ -158,16 +158,19 @@ let handlePostback = async (sender_psid, received_postback) => {
       response = { text: 'You just click no!' };
       break;
     case 'GET_STARTED':
-      await client.sendText(sender_psid, 'Welcome', {
-        quickReplies: [
-          {
-            contentType: 'text',
-            title: 'Red',
-            payload: 'PICKING_RED',
-          },
-        ],
-      });
-      // response = { text: 'Welcome you to Linh Bot' };
+      response = { 
+        "payload": {
+          "template_type":"button",
+          "text":"Check my website",
+          "buttons":[
+            {
+              "type":"web_url",
+              "url":"https://demo-chatbot-webview.herokuapp.com/",
+              "title":"My website"
+            },
+          ]
+        } 
+      };
       break;
     case 'PICKING_RED':
       response = { text: 'You choose red' };
