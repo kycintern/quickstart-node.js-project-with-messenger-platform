@@ -68,8 +68,7 @@ let getFacebookUsername = (sender_psid) => {
       request(
         {
           uri: url,
-          method: 'GET',
-          json: request_body
+          method: 'GET'
         },
         (err, res, body) => {
           if (!err) {
