@@ -158,7 +158,7 @@ let handlePostback = async (sender_psid, received_postback) => {
       response = { text: 'You just click no!' };
       break;
     case 'GET_STARTED':
-      let username = homePageServices.getFacebookUsername(sender_psid)
+      let username = await homePageServices.getFacebookUsername(sender_psid)
       response = { 
         text: `Welcome! ${username} to Linh Bot`
       };
