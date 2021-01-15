@@ -158,21 +158,9 @@ let handlePostback = async (sender_psid, received_postback) => {
       response = { text: 'You just click no!' };
       break;
     case 'GET_STARTED':
+      let username = homePageServices.getFacebookUsername(sender_psid)
       response = { 
-        "attachment": {
-          "type":"template",
-          "payload": {
-            "template_type":"button",
-            "text":"Check my website",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"https://demo-chatbot-webview.herokuapp.com/",
-                "title":"My website"
-              },
-            ]
-          } 
-        }
+        text: `Welcome! ${username} to Linh Bot`
       };
       break;
     case 'PICKING_RED':
